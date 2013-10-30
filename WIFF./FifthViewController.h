@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  FifthViewController.h
 //  WIFF.
 //
 //  Created by John Lam on 2013-10-15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SecondViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIWebView *webViewUpdates;
+@interface FifthViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIWebView *webViewFAQ;
 
 @end

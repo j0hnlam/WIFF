@@ -13,11 +13,30 @@
 @end
 
 @implementation SecondViewController
+@synthesize webViewUpdates;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    NSString *fullURL = @"http://wiff.hamelk.com/blog";
+    NSURL *url = [NSURL URLWithString:fullURL];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    webViewUpdates.delegate = (id)self;
+    [webViewUpdates loadRequest:requestObj];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    [webViewUpdates.scrollView addSubview:refreshControl];
+}
+
+-(void)handleRefresh:(UIRefreshControl *)refresh {
+    // Reload my data
+    NSString *fullURL = @"http://wiff.hamelk.com/blog";
+    NSURL *url = [NSURL URLWithString:fullURL];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    [webViewUpdates loadRequest:requestObj];
+    [refresh endRefreshing];
 }
 
 - (void)didReceiveMemoryWarning

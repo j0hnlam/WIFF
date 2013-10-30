@@ -1,46 +1,55 @@
 //
-//  FirstViewController.m
+//  FifthViewController.m
 //  WIFF.
 //
 //  Created by John Lam on 2013-10-15.
 //  Copyright (c) 2013 John Lam. All rights reserved.
 //
 
-#import "FirstViewController.h"
+#import "FifthViewController.h"
 
-@interface FirstViewController ()
-
+@interface FifthViewController ()
 
 @end
 
-@implementation FirstViewController
-@synthesize webView;
+@implementation FifthViewController
+@synthesize webViewFAQ;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    NSString *fullURL = @"http://wiff.hamelk.com";
+	// Do any additional setup after loading the view.
+    NSString *fullURL = @"http://wiff.hamelk.com/FAQ";
     NSURL *url = [NSURL URLWithString:fullURL];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    webView.delegate = (id)self;
-    [webView loadRequest:requestObj];
+    webViewFAQ.delegate = (id)self;
+    [webViewFAQ loadRequest:requestObj];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
-    [webView.scrollView addSubview:refreshControl];
+    [webViewFAQ.scrollView addSubview:refreshControl];
     
-
+	// Do any additional setup after loading the view.
 }
 
 -(void)handleRefresh:(UIRefreshControl *)refresh {
     // Reload my data
-    NSString *fullURL = @"http://wiff.hamelk.com";
+    NSString *fullURL = @"http://wiff.hamelk.com/FAQ";
     NSURL *url = [NSURL URLWithString:fullURL];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:requestObj];
+    [webViewFAQ loadRequest:requestObj];
     [refresh endRefreshing];
 }
+
 
 - (void)didReceiveMemoryWarning
 {

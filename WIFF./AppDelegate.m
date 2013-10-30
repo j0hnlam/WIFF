@@ -12,6 +12,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        UIStoryboard *storyboard;
+        
+        CGSize result = [[UIScreen mainScreen]bounds].size;
+        CGFloat scale = [UIScreen mainScreen].scale;
+        result = CGSizeMake(result.width * scale, result.height * scale);
+        
+        if (result.height == 1136){
+            storyboard = [UIStoryboard storyboardWithName:@"iPhone5" bundle:Nil];
+            UIViewController *initViewController = [storyboard instantiateInitialViewController];
+            [self.window setRootViewController:initViewController];
+        }
+    }
     // Override point for customization after application launch.
     return YES;
 }
